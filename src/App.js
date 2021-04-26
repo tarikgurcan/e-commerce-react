@@ -8,6 +8,8 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils.js";
 import React from "react"
 import {connect} from "react-redux"
 import {setCurrentUser} from "./redux/user/user-actions"
+import {selectCurrentUser} from "./redux/user/user-selector"
+import CheckoutPage from "./pages/Checkout/checkout.component.jsx";
 
 class App extends React.Component {
   unsubscribeFromAuth=null;
@@ -46,14 +48,15 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path="/signInSignUp" render={()=>this.props.currentUser?(<Redirect to="/"/>):<SignInSignUp/>} />
+          <Route exact path="/checkout" component={CheckoutPage}/>
         </Switch>
       </div>
     );
   }
 }
 
-const mapStatetoProps=({user})=>({
- currentUser:user.currentUser
+const mapStatetoProps=(state)=>({
+ currentUser:selectCurrentUser(state)
 })
 
 const mapDispatchtoProps=(dispatch)=>({
