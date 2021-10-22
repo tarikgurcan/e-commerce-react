@@ -30,6 +30,9 @@ class App extends React.Component {
         setCurrentUser(userAuth)
       }
   })
+  // ADDİNG SHOP DATA TO FİREBASE
+  // addCollectionAndDocuments("collections",
+  // collectionArray.map(({title,items})=>({title,items})))
   }
 //Prevent Memory Leaks
   componentWillUnmount(){
@@ -55,7 +58,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps=(state)=>({
-  currentuser:state.user.currentuser
+  currentuser:state.user.currentuser,
+  // collectionArray:selectCollectionPreview(state)
 })
 
 const mapDispatchToProps=(dispatch)=>({
