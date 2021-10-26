@@ -1,4 +1,5 @@
 import React from "react"
+import { useEffect } from "react";
 import { Homepage } from "./pages/homepage/homepage.components";
 import {Route,Switch,Redirect} from "react-router-dom"
 import "./App.css"
@@ -9,12 +10,11 @@ import { connect } from "react-redux";
 import { checkUserSession } from "./redux/user/user-action";
 import CheckoutPage from "./pages/checkout/checkout.component";
 
-class App extends React.Component {
-  unSubscribefromAuth=null
+const App =({currentuser,checkUserSession})=> {
 
-  componentDidMount(){
-    const {checkUserSession} = this.props;
-    checkUserSession();
+useEffect(()=>{
+  checkUserSession()
+},[checkUserSession])
 
   //   this.unSubscribefromAuth=auth.onAuthStateChanged(async (userAuth)=>{
   //     if(userAuth){
@@ -31,16 +31,15 @@ class App extends React.Component {
   //       setCurrentUser(userAuth)
   //     }
   // })
+
+
+  
   // ADDİNG SHOP DATA TO FİREBASE
   // addCollectionAndDocuments("collections",
   // collectionArray.map(({title,items})=>({title,items})))
-  }
-//Prevent Memory Leaks
-  componentWillUnmount(){
-    this.unSubscribefromAuth()
-  }
 
-  render(){
+//Prevent Memory Leaks
+
     return (
       <div>
         <Header/>
@@ -49,14 +48,13 @@ class App extends React.Component {
         <Route path="/shop" component={Shoppage}/>
         <Route exact path="/signin" render={()=>{
           return(
-          this.props.currentuser?<Redirect to="/"/>:(<SignInSignUp/>))
+          currentuser?<Redirect to="/"/>:(<SignInSignUp/>))
         }}/>
         <Route exact path="/checkout" component={CheckoutPage}/>
         </Switch>
       </div>
     );
   }
-}
 
 const mapStateToProps=(state)=>({
   currentuser:state.user.currentuser,
