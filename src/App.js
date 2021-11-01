@@ -2,7 +2,7 @@ import React from "react"
 import { useEffect } from "react";
 import { Homepage } from "./pages/homepage/homepage.components";
 import {Route,Switch,Redirect} from "react-router-dom"
-import "./App.css"
+import {GlobalStyle} from "./global.styles"
 import Shoppage from "./pages/shoppage/shoppage.component";
 import Header from "./components/header/header.component";
 import SignInSignUp from "./pages/SingInAndSignUp/SingInAndSignUp.component";
@@ -42,6 +42,7 @@ useEffect(()=>{
 
     return (
       <div>
+      <GlobalStyle/>
         <Header/>
         <Switch>
         <Route exact path="/" component={Homepage}/>
