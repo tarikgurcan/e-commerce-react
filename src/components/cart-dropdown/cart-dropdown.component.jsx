@@ -1,5 +1,5 @@
 import React from 'react'
-import { CartItem } from '../cart-item/cart-item.component'
+import CartItem from '../cart-item/cart-item.component'
 import CustomButton from '../custom-button/custom-button'
 import {connect} from "react-redux"
 import "./cart-dropdown.styles.scss"
